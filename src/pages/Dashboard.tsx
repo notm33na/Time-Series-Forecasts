@@ -131,8 +131,8 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="space-y-6 p-6">
-      <div className="flex flex-col lg:flex-row gap-6">
+    <div className="space-y-4 p-4">
+      <div className="flex flex-col lg:flex-row gap-4">
         {/* Controls Panel */}
         <Card className="glass-panel lg:w-80 shrink-0">
           <CardHeader>
@@ -210,7 +210,7 @@ const Dashboard = () => {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <ResponsiveContainer width="100%" height={400}>
+            <ResponsiveContainer width="100%" height={500}>
               <AreaChart data={combinedData}>
                 <defs>
                   <linearGradient id="colorPrice" x1="0" y1="0" x2="0" y2="1">
