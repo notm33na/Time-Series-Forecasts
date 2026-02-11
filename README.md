@@ -1,4 +1,4 @@
-# Forecast Pro Dash
+# time Series Forecasts
 
 A full-stack **adaptive forecasting system** with portfolio management: time-series forecasts (stocks, forex, crypto), multiple ML models, evaluation, and a React dashboard.
 
@@ -13,14 +13,14 @@ A full-stack **adaptive forecasting system** with portfolio management: time-ser
 
 ## Tech Stack
 
-| Layer      | Stack |
-|-----------|--------|
-| Frontend  | React 18, TypeScript, Vite, Tailwind CSS, shadcn/ui, Recharts, Plotly.js, React Query |
-| Backend   | FastAPI, Uvicorn |
-| Database  | MongoDB (primary), SQLite (optional) |
-| ML        | TensorFlow/Keras (LSTM, GRU, Transformer), statsmodels (ARIMA, exponential smoothing), scikit-learn |
-| Data      | pandas, numpy, yfinance |
-| DevOps    | Docker, Docker Compose |
+| Layer    | Stack                                                                                               |
+| -------- | --------------------------------------------------------------------------------------------------- |
+| Frontend | React 18, TypeScript, Vite, Tailwind CSS, shadcn/ui, Recharts, Plotly.js, React Query               |
+| Backend  | FastAPI, Uvicorn                                                                                    |
+| Database | MongoDB (primary), SQLite (optional)                                                                |
+| ML       | TensorFlow/Keras (LSTM, GRU, Transformer), statsmodels (ARIMA, exponential smoothing), scikit-learn |
+| Data     | pandas, numpy, yfinance                                                                             |
+| DevOps   | Docker, Docker Compose                                                                              |
 
 ## Project Structure
 
@@ -60,9 +60,9 @@ Runs MongoDB, FastAPI backend, and React frontend:
 docker-compose up --build
 ```
 
-- API: http://localhost:8000  
-- Frontend: http://localhost:3000  
-- MongoDB: localhost:27017  
+- API: http://localhost:8000
+- Frontend: http://localhost:3000
+- MongoDB: localhost:27017
 
 ### Option 2: Local development
 
@@ -98,28 +98,28 @@ Frontend runs at http://localhost:5173 (Vite default). Set `VITE_API_URL` if you
 
 Backend settings use the `FORECAST_` prefix. Create a `.env` in `backend/` or set:
 
-| Variable | Description | Default |
-|----------|-------------|---------|
-| `FORECAST_MONGO_URI` | MongoDB connection string | `mongodb://localhost:27017/` |
-| `FORECAST_MONGO_DB` | Database name | `forecast_db` |
-| `FORECAST_USE_MONGO` | Use MongoDB | `true` |
-| `FORECAST_SYMBOL` | Default symbol | `AAPL` |
-| `FORECAST_AUTO_START_RETRAINING` | Auto-start scheduled retraining | `false` |
+| Variable                         | Description                     | Default                      |
+| -------------------------------- | ------------------------------- | ---------------------------- |
+| `FORECAST_MONGO_URI`             | MongoDB connection string       | `mongodb://localhost:27017/` |
+| `FORECAST_MONGO_DB`              | Database name                   | `forecast_db`                |
+| `FORECAST_USE_MONGO`             | Use MongoDB                     | `true`                       |
+| `FORECAST_SYMBOL`                | Default symbol                  | `AAPL`                       |
+| `FORECAST_AUTO_START_RETRAINING` | Auto-start scheduled retraining | `false`                      |
 
 For Docker, the compose file sets `FORECAST_MONGO_URI=mongodb://mongodb:27017/` and `VITE_API_URL=http://localhost:8000` for the frontend.
 
 ## API Overview
 
-| Base path | Description |
-|-----------|-------------|
-| `/api/data` | OHLCV data, list symbols, ingestion |
-| `/api/forecast` | Generate forecasts (multi-model, horizons, symbols) |
-| `/api/models` | List/register models, model metadata |
-| `/api/evaluation` | Run evaluation, get results |
-| `/api/portfolio` | Portfolio state, backtest |
-| `/api/retraining` | Start/stop scheduled retraining |
-| `/dashboard` | Optional Dash dashboard (mounted under FastAPI) |
-| `/health` | Health check |
+| Base path         | Description                                         |
+| ----------------- | --------------------------------------------------- |
+| `/api/data`       | OHLCV data, list symbols, ingestion                 |
+| `/api/forecast`   | Generate forecasts (multi-model, horizons, symbols) |
+| `/api/models`     | List/register models, model metadata                |
+| `/api/evaluation` | Run evaluation, get results                         |
+| `/api/portfolio`  | Portfolio state, backtest                           |
+| `/api/retraining` | Start/stop scheduled retraining                     |
+| `/dashboard`      | Optional Dash dashboard (mounted under FastAPI)     |
+| `/health`         | Health check                                        |
 
 Docs: http://localhost:8000/docs when the backend is running.
 
