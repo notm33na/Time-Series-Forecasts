@@ -1,4 +1,4 @@
-import { BarChart3, Settings, Info, ChevronRight } from "lucide-react";
+import { BarChart3, Settings, Info, ChevronRight, Wallet } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import {
   Sidebar,
@@ -14,6 +14,7 @@ import {
 
 const menuItems = [
   { title: "Dashboard", url: "/", icon: BarChart3 },
+  { title: "Portfolio", url: "/portfolio", icon: Wallet },
   { title: "Settings", url: "/settings", icon: Settings },
   { title: "About", url: "/about", icon: Info },
 ];

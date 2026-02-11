@@ -1,24 +1,17 @@
-import { User } from "@supabase/supabase-js";
 import { Button } from "./ui/button";
-import { supabase } from "@/integrations/supabase/client";
-import { useToast } from "@/hooks/use-toast";
-import { TrendingUp, LogOut, Menu } from "lucide-react";
+import { Menu, LogOut, User } from "lucide-react";
 import { useSidebar } from "./ui/sidebar";
+import { useAuth } from "@/contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
-interface NavbarProps {
-  user: User | null;
-}
-
-const Navbar = ({ user }: NavbarProps) => {
-  const { toast } = useToast();
+const Navbar = () => {
   const { toggleSidebar } = useSidebar();
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
 
-  const handleSignOut = async () => {
-    await supabase.auth.signOut();
-    toast({
-      title: "Signed out",
-      description: "You have been signed out successfully.",
-    });
+  const handleLogout = () => {
+    logout();
+    navigate("/auth", { replace: true });
   };
 
   return (
@@ -34,30 +27,33 @@ const Navbar = ({ user }: NavbarProps) => {
             <Menu className="h-5 w-5" />
           </Button>
           <div className="flex items-center gap-3">
-            <div className="p-2 rounded-lg bg-primary/10 glow-border">
-              <TrendingUp className="h-5 w-5 text-primary" />
-            </div>
             <h1 className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
               ForecastPro
             </h1>
           </div>
         </div>
 
-        {user && (
-          <div className="flex items-center gap-4">
-            <span className="text-sm text-muted-foreground hidden sm:inline">
-              {user.email}
-            </span>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={handleSignOut}
-              className="hover:bg-destructive/10 hover:text-destructive"
-            >
-              <LogOut className="h-4 w-4" />
-            </Button>
-          </div>
-        )}
+        <div className="flex items-center gap-4">
+          {user && (
+            <>
+              <div className="flex items-center gap-2 text-sm">
+                <User className="h-4 w-4 text-muted-foreground" />
+                <span className="text-muted-foreground hidden sm:inline">
+                  {user.name || user.email}
+                </span>
+              </div>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={handleLogout}
+                className="gap-2"
+              >
+                <LogOut className="h-4 w-4" />
+                <span className="hidden sm:inline">Logout</span>
+              </Button>
+            </>
+          )}
+        </div>
       </div>
     </header>
   );

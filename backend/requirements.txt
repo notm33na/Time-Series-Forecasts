@@ -1,0 +1,52 @@
+# Core Data Science Libraries
+pandas>=2.2.0
+numpy>=1.26.0
+scikit-learn>=1.4.0
+
+# Machine Learning Libraries
+statsmodels>=0.14.0          # ARIMA, VAR, Exponential Smoothing
+tensorflow>=2.15.0            # Neural networks (LSTM, GRU, Transformer)
+keras>=2.15.0                 # High-level neural network API
+
+# Optional: PyTorch (for alternative neural network implementations)
+# torch>=2.0.0
+# torchvision>=0.15.0
+
+# Visualization
+plotly>=5.24.0                # Candlestick charts and interactive visualizations
+
+# Web Framework
+fastapi>=0.115.0
+uvicorn[standard]>=0.32.0
+httpx>=0.27.0
+
+# Database
+sqlalchemy>=2.0.30            # SQL database ORM
+pymongo>=4.6.0                # MongoDB driver
+
+# Data Processing
+joblib>=1.4.0                 # Model serialization
+python-dateutil>=2.9.0
+
+# API and Validation
+pydantic>=2.9.0
+pydantic-settings>=2.6.0
+
+# Data Fetching
+yfinance>=0.2.50              # Financial data from Yahoo Finance
+requests>=2.31.0
+
+# Dashboard (Optional)
+dash>=2.18.0
+dash-bootstrap-components>=1.6.0
+
+# Utilities
+python-dotenv>=1.0.1          # Environment variable management
+loguru>=0.7.2                 # Logging
+diagrams>=0.23.3              # Architecture diagrams
+tqdm>=4.66.0                  # Progress bars for downloads
+huggingface-hub>=0.20.0       # Hugging Face Hub integration
+
+# Testing
+pytest>=8.3.0
+pytest-asyncio>=0.23.0

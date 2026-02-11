@@ -1,0 +1,69 @@
+version: '3.8'
+
+services:
+  # MongoDB Database
+  mongodb:
+    image: mongo:7.0
+    container_name: forecast_mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: forecast_db
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - forecast_network
+
+  # FastAPI Backend
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: forecast_backend
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - FORECAST_MONGO_URI=mongodb://mongodb:27017/
+      - FORECAST_MONGO_DB=forecast_db
+      - FORECAST_USE_MONGO=true
+      - FORECAST_DATABASE_URL=sqlite:///./data/forecast.db
+    volumes:
+      - ./backend:/app
+      - ./backend/data:/app/data
+      - ./backend/artifacts:/app/artifacts
+      - ./backend/logs:/app/logs
+    depends_on:
+      - mongodb
+    networks:
+      - forecast_network
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+
+  # React Frontend
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: forecast_frontend
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - VITE_API_URL=http://localhost:8000
+    volumes:
+      - ./src:/app/src
+      - ./public:/app/public
+    depends_on:
+      - backend
+    networks:
+      - forecast_network
+    command: npm run dev -- --host
+
+volumes:
+  mongodb_data:
+
+networks:
+  forecast_network:
+    driver: bridge
+

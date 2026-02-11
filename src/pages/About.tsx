@@ -1,38 +1,47 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { TrendingUp, Database, Lock, Zap, LineChart, Code } from "lucide-react";
+import { TrendingUp, LineChart, Brain, Target, RefreshCw, Activity } from "lucide-react";
 
+// About page component - updated to reflect actual project features
 const About = () => {
   const features = [
     {
       icon: TrendingUp,
       title: "Multi-Asset Forecasting",
-      description: "Support for stocks, cryptocurrencies, and forex instruments",
+      description: "Support for stocks, cryptocurrencies, and forex instruments with multiple forecast horizons (1h, 3h, 24h, 72h)",
+    },
+    {
+      icon: Brain,
+      title: "Advanced ML Models",
+      description: "Traditional models (ARIMA) and neural networks (LSTM, GRU, Transformer) with adaptive ensemble",
+    },
+    {
+      icon: RefreshCw,
+      title: "Adaptive Learning",
+      description: "Incremental learning, fine-tuning, scheduled retraining, and dynamic model reweighting based on performance",
+    },
+    {
+      icon: Activity,
+      title: "Continuous Evaluation",
+      description: "Automatic evaluation when ground truth arrives, real-time metrics (MAE, RMSE, MAPE), and error visualization",
+    },
+    {
+      icon: Target,
+      title: "Portfolio Management",
+      description: "Simulated trading with multiple strategies (forecast-based, MA crossover, combined) and performance tracking",
     },
     {
       icon: LineChart,
-      title: "Advanced Charting",
-      description: "Interactive candlestick charts with confidence intervals",
+      title: "Interactive Visualization",
+      description: "Candlestick charts with forecast overlays, color-coded error indicators, and real-time performance monitoring",
     },
-    {
-      icon: Zap,
-      title: "External Model Integration",
-      description: "Connect to your Python ML models via REST API",
-    },
-    {
-      icon: Database,
-      title: "Historical Data Storage",
-      description: "OHLC data storage with PostgreSQL",
-    },
-    {
-      icon: Lock,
-      title: "Secure Authentication",
-      description: "Email/password authentication with secure API key storage",
-    },
-    {
-      icon: Code,
-      title: "Modern Tech Stack",
-      description: "Built with React, TypeScript, and Lovable Cloud",
-    },
+  ];
+
+  const models = [
+    { name: "ARIMA", type: "Traditional" },
+    { name: "LSTM", type: "Neural Network" },
+    { name: "GRU", type: "Neural Network" },
+    { name: "Transformer", type: "Neural Network" },
+    { name: "Adaptive Ensemble", type: "Ensemble" },
   ];
 
   return (
@@ -46,18 +55,17 @@ const About = () => {
           </div>
           <CardTitle className="text-3xl">About ForecastPro</CardTitle>
           <CardDescription className="text-base">
-            A professional financial forecasting platform built to connect with your ML models
+            A comprehensive financial forecasting platform combining traditional time series models with modern neural network approaches
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
           <div>
             <h3 className="text-xl font-semibold mb-3 text-primary">Overview</h3>
             <p className="text-muted-foreground leading-relaxed">
-              ForecastPro is a full-stack web application designed to visualize financial market data
-              and integrate with external machine learning models for price forecasting. The platform
-              provides a clean, mobile-friendly dashboard where users can select instruments, choose
-              forecast horizons, and view predictions with confidence intervals overlaid on historical
-              price charts.
+              ForecastPro is a professional-grade FinTech forecasting platform that provides comprehensive financial market predictions
+              across multiple asset classes. The system features adaptive learning mechanisms that continuously improve model performance,
+              real-time evaluation and monitoring, and integrated portfolio management capabilities. Built with a microservice architecture,
+              the platform supports both batch and streaming data processing with automatic model retraining and versioning.
             </p>
           </div>
 
@@ -80,6 +88,49 @@ const About = () => {
           </div>
 
           <div>
+            <h3 className="text-xl font-semibold mb-3 text-primary">Forecasting Models</h3>
+            <div className="grid md:grid-cols-2 gap-3">
+              {models.map((model) => (
+                <div
+                  key={model.name}
+                  className="p-3 rounded-lg bg-secondary/20 border border-border/50 flex items-center justify-between"
+                >
+                  <span className="font-medium">{model.name}</span>
+                  <span className="text-xs text-muted-foreground bg-primary/10 px-2 py-1 rounded">
+                    {model.type}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <h3 className="text-xl font-semibold mb-3 text-primary">Adaptive Learning Capabilities</h3>
+            <div className="space-y-2 text-muted-foreground">
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-primary"></span>
+                <strong>Incremental Learning:</strong> Online updates using SGDRegressor with partial_fit()
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-primary"></span>
+                <strong>Fine-Tuning:</strong> Rolling window fine-tuning for neural models (LSTM, GRU, Transformer)
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-primary"></span>
+                <strong>Scheduled Retraining:</strong> Automatic retraining based on time, performance degradation, or new data
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-primary"></span>
+                <strong>Adaptive Ensemble:</strong> Dynamic reweighting based on recent errors with exponential decay
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-primary"></span>
+                <strong>Model Versioning:</strong> Complete model registry with performance tracking and artifact storage
+              </div>
+            </div>
+          </div>
+
+          <div>
             <h3 className="text-xl font-semibold mb-3 text-primary">Tech Stack</h3>
             <div className="space-y-2 text-muted-foreground">
               <div className="flex items-center gap-2">
@@ -88,15 +139,19 @@ const About = () => {
               </div>
               <div className="flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-primary"></span>
-                <strong>Backend:</strong> Lovable Cloud (PostgreSQL, Auth, Storage)
+                <strong>Backend:</strong> FastAPI (Python), RESTful API with auto-generated Swagger docs
               </div>
               <div className="flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-primary"></span>
-                <strong>Charts:</strong> Recharts library for responsive visualizations
+                <strong>Database:</strong> MongoDB (historical data, forecasts, model versions, portfolio)
               </div>
               <div className="flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-primary"></span>
-                <strong>External API:</strong> REST integration for Python ML models
+                <strong>ML Libraries:</strong> scikit-learn, statsmodels, TensorFlow/Keras, pandas
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-primary"></span>
+                <strong>Visualization:</strong> Plotly for charts and interactive dashboards
               </div>
             </div>
           </div>
@@ -104,12 +159,12 @@ const About = () => {
           <div className="pt-4 border-t border-border">
             <h3 className="text-xl font-semibold mb-3 text-primary">Getting Started</h3>
             <ol className="space-y-2 text-muted-foreground list-decimal list-inside">
-              <li>Configure your model API endpoint in the Settings page</li>
-              <li>Choose an instrument type (Stock, Crypto, or Forex)</li>
-              <li>Select a specific symbol to view historical data</li>
-              <li>Pick a forecast horizon (1h, 3h, 24h, or 72h)</li>
-              <li>Click "Run Forecast" to generate predictions</li>
-              <li>View results with confidence bands on the interactive chart</li>
+              <li>Choose an instrument type (Stock, Crypto, or Forex) and select a symbol</li>
+              <li>Pick a forecast horizon (1h, 3h, 24h, or 72h) and model type</li>
+              <li>Generate forecasts and view predictions overlaid on historical price charts</li>
+              <li>Monitor model performance with real-time metrics and error visualization</li>
+              <li>Set up portfolio strategies and track simulated trading performance</li>
+              <li>Configure scheduled retraining for automatic model updates</li>
             </ol>
           </div>
         </CardContent>
